@@ -1,8 +1,9 @@
 # Algo Checker
 
-AlgoChecker verify On-Chain and Off-Chain code, Support TEAL/PyTEAL/REACH script. Save record with [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
+AlgoChecker verify On-Chain and Off-Chain code, Support TEAL/PyTEAL/REACH script. 
 
-This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/) + [pipeline-ui](https://www.pipeline-ui.com/) + [WebMode](https://algobuilder.dev/api/web/modules). 
+This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). Save record with [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
+
 
 # Screenshots
 
