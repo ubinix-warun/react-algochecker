@@ -1,8 +1,8 @@
 # Algo Checker
 
-In this template we demonstrate `AlgoChecker`. 
+AlgoChecker verify On-Chain and Off-Chain code, Support TEAL/PyTEAL/REACH script.
 
-This is a [React](https://reactjs.org/) + [pipeline-ui](https://www.pipeline-ui.com/) + [WebMode](https://algobuilder.dev/api/web/modules) project which serves as an app template.
+This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/) + [pipeline-ui](https://www.pipeline-ui.com/) + [WebMode](https://algobuilder.dev/api/web/modules).
 
 # Screenshots
 
