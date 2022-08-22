@@ -48,7 +48,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
-import CheckerListPost from './components/CheckerListPost';
+import CheckerListPost, { CheckerData, CreateCheckerData } from './components/CheckerListPost';
 
 import axios from 'axios';
 
@@ -95,8 +95,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const Networks = ['Mainnet', "Testnet"];
 
 const App = () => {
-	// const [address, updateAddress] = useState<string>('');
-	// const [appId, updateAppId] = useState<string | undefined>(undefined);
+	const [address, updateAddress] = useState<string>('');
+	const [appId, updateAppId] = useState<string | undefined>(undefined);
 
 	// const checkerListPostRef = React.useRef<HTMLInputElement>(null);
 	// const refreshCheckerFunc = React.useRef(()=>{})
@@ -124,6 +124,8 @@ const App = () => {
 	const [openSnackApiError, setOpenSnackApiError] = React.useState(false);
 	const [snackApiWarningMessage, setSnackApiWarningMessage] = React.useState('');
 	const [openSnackApiWarning, setOpenSnackApiWarning] = React.useState(false);
+
+	const [checkerList, setCheckerList] = React.useState<CheckerData[]>([]);
 
 	// const handleClick = () => {
 	//   setOpen(true);
@@ -194,7 +196,7 @@ const App = () => {
 
 				clearDataAll();
 
-				// RefreshCheckerList();
+				RefreshCheckerList();
 
 				setStateDrawer({
 					top: false,
@@ -572,7 +574,6 @@ const App = () => {
 					showSnackApiWarning("MissMatch", "OpCode");
 				}
 
-
 			}).catch(error => {
 
 				showSnackApiError(error, "ApiCompile");
@@ -657,11 +658,81 @@ const App = () => {
 	// 	}
 	// }, 4000);
 
+	const RefreshCheckerList = () => {
+
+		axios.get(`${API_CHECKER_URL}/checker`).then(
+		  res => {
+	
+			setCheckerList([]);
+	
+			let tmpCheckerList: CheckerData[] = [];
+			const clist = res.data;
+	
+			for(const k in clist) {
+			  const v = clist[k];
+			  tmpCheckerList = [
+				...tmpCheckerList, 
+				CreateCheckerData(
+				  v.timestamp,
+				  v.name,
+				  v.network,
+				  v.appid,
+				  v.onchain,
+				  v.githuburl,
+				  v.sha,
+				  v.path,
+				  v.offchain,
+				  k
+				)];
+			}
+	
+			setCheckerList(tmpCheckerList);
+	
+			// Object.keys(clist).forEach(key => {
+			//   console.log(key, clist[key]);
+			//   setCheckerList(
+			//     [ 
+			//       ...checkerList, 
+			//         createCheckerData(
+			//           clist[key].timestamp,
+			//           clist[key].name,
+			//           clist[key].network,
+			//           clist[key].appid,
+			//           clist[key].onchain,
+			//           clist[key].githuburl,
+			//           clist[key].sha,
+			//           clist[key].path,
+			//           clist[key].offchain,
+			//           key)
+			//     ]);
+			// });
+	
+		  }).catch(error => {
+	
+			console.log(error);
+	
+		  });
+	
+	
+	  };
+
+	  
 	const checkerListPost = {
 		// callRefresh: refreshCheckerFunc
+		clist: checkerList,
 		
 	  };
 
+
+	  React.useEffect(() => {
+
+		RefreshCheckerList();
+	
+		// setInterval(() => {
+	
+		// }, 5000);
+	
+	  }, []);
 
 	return (
 
@@ -888,23 +959,24 @@ const App = () => {
 			</div>
 
 		</ThemeProvider>
-
-		// <Card bg={'light-gray'} width={'auto'} maxWidth={'520px'} mx={'auto'}>
-		// 	<div className="App">
-		// 		<h1>Number Increment App</h1>
-		// 		<SwitchNet />
-		// 		<br />
-		// 		<WalletConnect updateAddress={updateAddress} />
-		// 		{address.length ? <DeployApp /> : null}
-		// 		{address.length && appId ? (
-		// 			<>
-		// 				<IncreaseCounter addr={address} appId={parseInt(appId)} />
-		// 				<ReadAppData appId={parseInt(appId)} />
-		// 			</>
-		// 		) : null}
-		// 	</div>
-		// </Card>
+		
 	);
 };
 
 export default App;
+
+//<Card bg={'light-gray'} width={'auto'} maxWidth={'520px'} mx={'auto'}>
+//<div className="App">
+//	<h1>Number Increment App</h1>
+//	<SwitchNet />
+//	<br />
+//	<WalletConnect updateAddress={updateAddress} />
+//	{address.length ? <DeployApp /> : null}
+//	{address.length && appId ? (
+//		<>
+//			{/* <IncreaseCounter addr={address} appId={parseInt(appId)} /> */}
+//			{/* <ReadAppData appId={parseInt(appId)} /> */}
+//		</>
+//	) : null}
+//</div>
+//</Card>

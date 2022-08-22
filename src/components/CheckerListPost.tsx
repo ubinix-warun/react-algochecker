@@ -70,7 +70,7 @@ const columns: readonly Column[] = [
   //   format: (value: number) => value.toFixed(2),
   // },
 
-interface CheckerData {
+export interface CheckerData {
   timestamp: string;
   name: string;
   network: string;
@@ -84,7 +84,7 @@ interface CheckerData {
   key: string;
 }
 
-function createCheckerData(
+export function CreateCheckerData(
   timestamp: string,
   name: string,
   network: string,
@@ -119,6 +119,7 @@ function createCheckerData(
 interface CheckerListPostProps {
   post: {
     // callRefresh: React.MutableRefObject<()=>{}>,
+    clist: CheckerData[],
   };
 }
 
@@ -128,7 +129,7 @@ export default function CheckerListPost(props: CheckerListPostProps) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-	const [checkerList, setCheckerList] = React.useState<CheckerData[]>([]);
+	// const [checkerList, setCheckerList] = React.useState<CheckerData[]>([]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -138,76 +139,6 @@ export default function CheckerListPost(props: CheckerListPostProps) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  const RefreshCheckerList = () => {
-
-    axios.get(`${API_CHECKER_URL}/checker`).then(
-      res => {
-
-        setCheckerList([]);
-
-        let tmpCheckerList: CheckerData[] = [];
-        const clist = res.data;
-
-        for(const k in clist) {
-          const v = clist[k];
-          tmpCheckerList = [
-            ...tmpCheckerList, 
-            createCheckerData(
-              v.timestamp,
-              v.name,
-              v.network,
-              v.appid,
-              v.onchain,
-              v.githuburl,
-              v.sha,
-              v.path,
-              v.offchain,
-              k
-            )];
-        }
-
-				setCheckerList(tmpCheckerList);
-
-        // Object.keys(clist).forEach(key => {
-        //   console.log(key, clist[key]);
-        //   setCheckerList(
-        //     [ 
-        //       ...checkerList, 
-        //         createCheckerData(
-        //           clist[key].timestamp,
-        //           clist[key].name,
-        //           clist[key].network,
-        //           clist[key].appid,
-        //           clist[key].onchain,
-        //           clist[key].githuburl,
-        //           clist[key].sha,
-        //           clist[key].path,
-        //           clist[key].offchain,
-        //           key)
-        //     ]);
-        // });
-
-      }).catch(error => {
-
-        console.log(error);
-
-      });
-
-
-  };
-
-  React.useEffect(() => {
-
-    RefreshCheckerList();
-
-    // post.callRefresh = useRef(RefreshCheckerList);
-
-    // setInterval(() => {
-
-    // }, 5000);
-
-  }, []);
   
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -227,7 +158,7 @@ export default function CheckerListPost(props: CheckerListPostProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {checkerList
+          {post.clist
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row) => {
               return (
@@ -355,7 +286,7 @@ export default function CheckerListPost(props: CheckerListPostProps) {
     <TablePagination
       rowsPerPageOptions={[10, 25, 100]}
       component="div"
-      count={checkerList.length}
+      count={post.clist.length}
       rowsPerPage={rowsPerPage}
       page={page}
       onPageChange={handleChangePage}
