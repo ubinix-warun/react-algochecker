@@ -12,33 +12,25 @@ This is a [React](https://reactjs.org/) + [pipeline-ui](https://www.pipeline-ui.
 
 # Config & Build
 
-* Edit Tatum API key on src/config.json
+* Copy .env.example and Edit .env
 ```
-{
-    "TATUM_API_KEY": "<TATUM_API_KEY>",
-    "TATUM_API_URL": "https://api-eu1.tatum.io"
-}
+REACT_APP_API_CHECKER_URL=<>
+REACT_APP_API_INDEXER_TESTNET_URL=https://algoindexer.testnet.algoexplorerapi.io
+REACT_APP_API_INDEXER_MAINNET_URL=https://algoindexer.algoexplorerapi.io
+REACT_APP_API_GITHUB_URL=https://api.github.com
+REACT_APP_GITHUB_URL=https://github.com
 ```
+
 * Run build script with npm
 ```
 nvm use v16.14.0
-npm run install
+yarn 
 
-npm run build
+yarn start
 ```
-In the project directory, you can run:
-
-### `yarn start`
-### `yarn test`
-
-### `yarn build`
-
-# Manual 
-
-
-
 
 # Credit
-* AlgoExplorer
+* Algorand, AlgoExplorer and Github (API).
+* Use MUI/React for opensource https://mui.com/
 
 
