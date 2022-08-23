@@ -31,8 +31,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-# cors = CORS(app, resources={r"/compile": {"origins": "http://localhost:3000"}})
-# cors = CORS(app, resources={r"/checker": {"origins": "http://localhost:3000"}})
+cors = CORS(app, resources={r"/compile": {"origins": "http://localhost:3000"}})
+cors = CORS(app, resources={r"/checker": {"origins": "http://localhost:3000"}})
 
 cors = CORS(app, resources={r"/compile": {"origins": "https://algochecker.web.app"}})
 cors = CORS(app, resources={r"/checker": {"origins": "https://algochecker.web.app"}})
@@ -124,7 +124,30 @@ def compile():
         dd1 = b64decode(json_data1['content'])
         f.write(str(dd1,'utf-8'))    
 
-    # os.system("reach compile tmp.rsh")
+    os.system("./reach compile tmp.rsh -o .")
+    os.system("echo \"console.log(_ALGO.appApproval);\" >> tmp.main.mjs")
+    os.system("node tmp.main.mjs > tmp_approval.opcode")
+
+    with open("tmp_approval.opcode", "rb") as f:
+
+        mybytearray = bytearray()
+
+        byte = f.read(1)
+        mybytearray+=byte
+        
+        while byte:
+            # Do stuff with byte.
+            byte = f.read(1)
+            mybytearray+=byte
+
+        os.remove("tmp.main.mjs")
+        os.remove("tmp_approval.opcode")
+
+        return jsonify({
+            "src": request.get_json()["url"],
+            "out": str(mybytearray,'utf-8').replace("\n","")
+          })
+
 
     # dd1 = b64decode(json_data1['content'])
     # response1 = client.compile(str(dd1,'utf-8'))
@@ -137,7 +160,7 @@ def compile():
   return 'Bad Request', 400
 
 
-# app.run()
+app.run()
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+# if __name__ == "__main__":
+#     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
