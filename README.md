@@ -5,6 +5,9 @@ AlgoChecker verify On-Chain and Off-Chain code, Support TEAL (PyTEAL/REACH) scri
 This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). serve API with [Flask](https://flask.palletsprojects.com/en/2.2.x/) and save record on [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
 
 
+<img src="https://user-images.githubusercontent.com/3756229/186065227-345ad806-a93a-4629-9058-e69dc880793f.png" width="70%">
+
+
 # Screenshots
 
 ![UI](https://user-images.githubusercontent.com/3756229/185951712-a1c88756-bd3b-4110-aa3b-4f4406428fd8.png)
@@ -45,6 +48,14 @@ python3 api.py
 
 ```
 
+* (optional) Setup and Firebase deploy
+
+```
+firebase init
+firebase deploy --only hosting:algochecker
+
+```
+
 
 # Example PysonDB for VerifyData 
 
@@ -79,7 +90,8 @@ python3 api.py
 ```
 
 # Credit
-* Algorand, [AlgoExplorer](https://algoexplorer.io/) and Github (API).
+* [Algorand](https://www.algorand.com/), [AlgoExplorer](https://algoexplorer.io/) and Github (API).
+* TEAL framework, [PyTEAL](https://pyteal.readthedocs.io/en/stable/), [ReachLang](https://docs.reach.sh/quickstart/).
 * Use MUI/React for opensource https://mui.com/
 
 
