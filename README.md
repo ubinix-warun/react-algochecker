@@ -9,7 +9,7 @@ This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). Sav
 
 ![UI](https://user-images.githubusercontent.com/3756229/185951712-a1c88756-bd3b-4110-aa3b-4f4406428fd8.png)
 
-### [Live Demo](https://youtu.be/oXoFhuJG1j4)
+### [VDO](https://youtu.be/oXoFhuJG1j4) [Live Demo](https://algochecker.firebaseapp.com/)
 
 # Config & Build
 
