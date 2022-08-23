@@ -28,6 +28,8 @@ nvm use v16.14.0
 yarn 
 
 yarn start
+
+firebase deploy --only hosting:algochecker
 ```
 
 # Credit
