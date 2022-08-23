@@ -849,7 +849,7 @@ const App = () => {
 									</Link>
 									{ targetFile !== undefined ? 
 										<Chip sx={{maxWidth: 320}} label={targetFile.path} 
-											color={opCode1 === opCode2 ? "success":"default"} 
+											color={showMatched() ? "success":"default"} 
 											onDelete={handleDeleteFileSelected} />
 										: <></> }
 									{/* <FormControlLabel 

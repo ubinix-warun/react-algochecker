@@ -1,10 +1,13 @@
 
-# Config .env
+# Deploy Cloud run!
 
 ```
+gcloud run deploy
+gcloud run deploy algochecker-api 
+
 ```
 
-# Dev command
+# Dev command (local)
 
 ```
 python3 -m venv venv

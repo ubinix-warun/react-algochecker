@@ -16,7 +16,7 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import { forwardRef, useRef } from "react"
 import axios from 'axios';
 
-const API_CHECKER_URL = process.env.REACT_APP_API_CHECKER_URL;
+// const API_CHECKER_URL = process.env.REACT_APP_API_CHECKER_URL;
 
 // {
 // 	"timestamp": "2022-08-22T06:40:38.779Z",

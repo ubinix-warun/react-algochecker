@@ -13,9 +13,9 @@ This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). ser
 
 # Config & Build
 
-* Copy .env.example and Edit .env
+* Copy .env.example and Edit .env (for Local)
 ```
-REACT_APP_API_CHECKER_URL=<>
+REACT_APP_API_CHECKER_URL=http://localhost:5000
 REACT_APP_API_INDEXER_TESTNET_URL=https://algoindexer.testnet.algoexplorerapi.io
 REACT_APP_API_INDEXER_MAINNET_URL=https://algoindexer.algoexplorerapi.io
 REACT_APP_API_GITHUB_URL=https://api.github.com
@@ -29,10 +29,24 @@ yarn
 
 yarn start
 
-firebase deploy --only hosting:algochecker
 ```
 
-# Example JSON VerifyData 
+* Run Api AlgoChecker on Local
+
+```
+cd src/teal
+
+python3 -m venv venv
+. venv/bin/activate
+
+pip3 install -r requirements.txt
+
+python3 api.py
+
+```
+
+
+# Example PysonDB for VerifyData 
 
 ```
 ...

@@ -37,6 +37,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app, resources={r"/compile": {"origins": "https://algochecker.web.app"}})
 cors = CORS(app, resources={r"/checker": {"origins": "https://algochecker.web.app"}})
 
+cors = CORS(app, resources={r"/compile": {"origins": "https://algochecker.firebaseapp.com"}})
+cors = CORS(app, resources={r"/checker": {"origins": "https://algochecker.firebaseapp.com"}})
+
 
 # checkerList = [
 #   {
@@ -134,7 +137,7 @@ def compile():
   return 'Bad Request', 400
 
 
-app.run()
+# app.run()
 
-# if __name__ == "__main__":
-#     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
