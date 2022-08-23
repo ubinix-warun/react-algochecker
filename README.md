@@ -52,6 +52,8 @@ python3 api.py
 
 ```
 firebase init
+
+yarn build
 firebase deploy --only hosting:algochecker
 
 ```
