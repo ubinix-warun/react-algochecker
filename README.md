@@ -2,7 +2,7 @@
 
 AlgoChecker verify On-Chain and Off-Chain code, Support TEAL (PyTEAL/REACH) script. 
 
-This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). serve API With [Flask](https://flask.palletsprojects.com/en/2.2.x/) and save record on [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
+This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). serve API with [Flask](https://flask.palletsprojects.com/en/2.2.x/) and save record on [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
 
 
 # Screenshots
