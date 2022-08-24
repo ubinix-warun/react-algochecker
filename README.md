@@ -1,6 +1,6 @@
 # Algo Checker
 
-AlgoChecker verify On-Chain and Off-Chain code, Support TEAL (PyTEAL/REACH) script. 
+AlgoChecker verifies On-Chain and Off-Chain code, and Support TEAL (PyTEAL/REACH) script. 
 
 This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). serve API with [Flask](https://flask.palletsprojects.com/en/2.2.x/) and save record on [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
 
@@ -99,8 +99,8 @@ gcloud run deploy algochecker-api
 ```
 
 # Future Work
-* Organize Smartcontract timeline view.
-* Merge another tool, Auditing, Formal verification.
+* Organize the Smartcontract versioning view.
+* Merge another tool, Auditing, and Formal verification.
 
 
 # Credit
