@@ -17,6 +17,7 @@ import { forwardRef, useRef } from "react"
 import axios from 'axios';
 
 // const API_CHECKER_URL = process.env.REACT_APP_API_CHECKER_URL;
+const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 
 // {
 // 	"timestamp": "2022-08-22T06:40:38.779Z",
@@ -172,7 +173,7 @@ export default function CheckerListPost(props: CheckerListPostProps) {
 
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <Link href={`https://github.com/${userrepo}/tree/${sha}`} color="inherit" target="_blank">
+                          <Link href={`${GITHUB_URL}/${userrepo}/tree/${sha}`} color="inherit" target="_blank">
                           {value}
                           </Link>
                         </TableCell>
@@ -187,7 +188,7 @@ export default function CheckerListPost(props: CheckerListPostProps) {
 
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <Link href={`https://github.com/${userrepo}/tree/${sha}/${path}`} color="inherit" target="_blank">
+                          <Link href={`${GITHUB_URL}/${userrepo}/tree/${sha}/${path}`} color="inherit" target="_blank">
                             <FileOpenIcon></FileOpenIcon>
                           </Link>
                         </TableCell>

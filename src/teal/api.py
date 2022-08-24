@@ -128,6 +128,8 @@ def compile():
     os.system("echo \"console.log(_ALGO.appApproval);\" >> tmp.main.mjs")
     os.system("node tmp.main.mjs > tmp_approval.opcode")
 
+    os.remove("tmp.rsh ")
+
     with open("tmp_approval.opcode", "rb") as f:
 
         mybytearray = bytearray()
@@ -148,14 +150,6 @@ def compile():
             "out": str(mybytearray,'utf-8').replace("\n","")
           })
 
-
-    # dd1 = b64decode(json_data1['content'])
-    # response1 = client.compile(str(dd1,'utf-8'))
-
-    # return jsonify({
-    #     "src": request.get_json()["url"],
-    #     "out": response1["result"]
-    #   })
 
   return 'Bad Request', 400
 

@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import TextField from '@mui/material/TextField';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -52,8 +54,51 @@ import CheckerListPost, { CheckerData, CreateCheckerData } from './components/Ch
 
 import axios from 'axios';
 
-
 import { styled, alpha } from '@mui/material/styles';
+
+const theme = createTheme();
+
+const Search = styled('div')(({ theme }) => ({
+	position: 'relative',
+	borderRadius: theme.shape.borderRadius,
+	backgroundColor: alpha(theme.palette.common.white, 0.15),
+	'&:hover': {
+		backgroundColor: alpha(theme.palette.common.white, 0.25),
+	},
+	marginRight: theme.spacing(2),
+	marginLeft: 0,
+	width: '100%',
+	[theme.breakpoints.up('sm')]: {
+		marginLeft: theme.spacing(3),
+		width: 'auto',
+	},
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+	padding: theme.spacing(0, 2),
+	height: '100%',
+	position: 'absolute',
+	pointerEvents: 'none',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+	color: 'inherit',
+	'& .MuiInputBase-input': {
+		padding: theme.spacing(1, 1, 1, 0),
+		// vertical padding + font size from searchIcon
+		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+		transition: theme.transitions.create('width'),
+		width: '100%',
+		[theme.breakpoints.up('md')]: {
+		width: '20ch',
+		},
+	},
+}));
+
+  
 const { SwitchNet, Card } = require('pipeline-ui');
 
 const API_CHECKER_URL = process.env.REACT_APP_API_CHECKER_URL;
@@ -61,8 +106,6 @@ const API_INDEXER_TESTNET = process.env.REACT_APP_API_INDEXER_TESTNET_URL;
 const API_INDEXER_MAINNET = process.env.REACT_APP_API_INDEXER_MAINNET_URL;
 const API_GITHUB_URL = process.env.REACT_APP_API_GITHUB_URL;
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-
-const theme = createTheme();
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 const drawerAnchor = 'right';
@@ -100,6 +143,9 @@ const App = () => {
 
 	// const checkerListPostRef = React.useRef<HTMLInputElement>(null);
 	// const refreshCheckerFunc = React.useRef(()=>{})
+
+	const [searchQuery, setSearchQuery] = React.useState('');
+	const [searchList, setSearchList] = React.useState<CheckerData[]>([]);
 
 	const [applicationID, setApplicationID] = React.useState('');
 	const [network, setNetwork] = React.useState('');
@@ -149,7 +195,29 @@ const App = () => {
 	  setOpenSnackApiWarning(false);
 	};
 	
-	  
+	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const search = event.target.value;
+		setSearchQuery(search);
+
+		
+		setSearchList([]);
+
+		let tmpSearchList: CheckerData[] = [];
+
+		for(const k in checkerList) {
+			const v = checkerList[k];
+			if(SearchFilter(search, v)) {
+				tmpSearchList = [
+				...tmpSearchList, 
+				v
+				];
+			}
+		}
+
+		setSearchList(tmpSearchList);
+
+	};
+
 	const handleAppIDChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const appId = event.target.value;
 		setApplicationID(appId);
@@ -658,35 +726,80 @@ const App = () => {
 	// 	}
 	// }, 4000);
 
+	const SearchFilter = (s: string, c: CheckerData): boolean => {
+
+		
+		if(s.length === 0)  // All
+		{
+			return true;
+		}
+
+		if(s.length < 3)  // <3, All
+		{
+			return true;
+
+		}
+
+		// // Search === appid 
+
+		// if(s === c.appid)
+		// {
+		// 	return true;
+		// }
+
+		// Search startWith name, sha, appid
+
+		if(c.appid.startsWith(s) ||
+			c.name.startsWith(s) ||
+			c.sha.startsWith(s))
+		{
+			return true;
+		}
+
+
+		return false;
+	};
+
 	const RefreshCheckerList = () => {
 
 		axios.get(`${API_CHECKER_URL}/checker`).then(
 		  res => {
 	
 			setCheckerList([]);
+			setSearchList([]);
 	
 			let tmpCheckerList: CheckerData[] = [];
+			let tmpSearchList: CheckerData[] = [];
 			const clist = res.data;
 	
 			for(const k in clist) {
 			  const v = clist[k];
+			  const i = CreateCheckerData(
+				v.timestamp,
+				v.name,
+				v.network,
+				v.appid,
+				v.onchain,
+				v.githuburl,
+				v.sha,
+				v.path,
+				v.offchain,
+				k
+			  );
 			  tmpCheckerList = [
 				...tmpCheckerList, 
-				CreateCheckerData(
-				  v.timestamp,
-				  v.name,
-				  v.network,
-				  v.appid,
-				  v.onchain,
-				  v.githuburl,
-				  v.sha,
-				  v.path,
-				  v.offchain,
-				  k
-				)];
+				i
+				];
+				if(SearchFilter(searchQuery,i)) {
+					tmpSearchList = [
+					...tmpSearchList, 
+					i
+					];
+				}
 			}
 	
 			setCheckerList(tmpCheckerList);
+			setSearchList(tmpSearchList);
 	
 			// Object.keys(clist).forEach(key => {
 			//   console.log(key, clist[key]);
@@ -719,7 +832,7 @@ const App = () => {
 	  
 	const checkerListPost = {
 		// callRefresh: refreshCheckerFunc
-		clist: checkerList,
+		clist: searchList,
 		
 	  };
 
@@ -932,7 +1045,20 @@ const App = () => {
 				>
 					{appname}
 				</Typography>
-				<Box display='flex' flexGrow={0.93} sx={{ display: { xs: 'none', md: 'flex' } }}></Box>
+
+				<Search sx={{ flexGrow: 0.3, display: { xs: 'none', md: 'flex' } }}>
+					<SearchIconWrapper>
+					<SearchIcon />
+					</SearchIconWrapper>
+					<StyledInputBase sx={{ flexGrow: 1 }}
+					placeholder="Search…"
+					inputProps={{ 'aria-label': 'search' }}
+
+					onChange={handleSearchChange} 
+					/>
+				</Search>
+
+				<Box display='flex' flexGrow={0.7} sx={{ display: { xs: 'none', md: 'flex' } }}></Box>
           
 				<Box sx={{ minWidth: 70 }}>
 					<IconButton

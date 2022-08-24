@@ -10,7 +10,7 @@ This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). ser
 
 # Screenshots
 
-![UI](https://user-images.githubusercontent.com/3756229/185951712-a1c88756-bd3b-4110-aa3b-4f4406428fd8.png)
+![UI](https://user-images.githubusercontent.com/3756229/186322797-106fcc9d-0f35-4ff8-9a97-804ca60ba898.png)
 
 ### Link [VDO](https://youtu.be/oXoFhuJG1j4) and [Live Demo](https://algochecker.firebaseapp.com/)
 
@@ -25,7 +25,7 @@ REACT_APP_API_GITHUB_URL=https://api.github.com
 REACT_APP_GITHUB_URL=https://github.com
 ```
 
-* Run build script with npm
+* Run build script with yarn/npm
 ```
 nvm use v16.14.0
 yarn 
@@ -48,13 +48,20 @@ python3 api.py
 
 ```
 
-* (optional) Setup and Firebase deploy
+* (optional) Setup and Firebase/CloudRun deploy
 
 ```
 firebase init
 
 yarn build
 firebase deploy --only hosting:algochecker
+
+cd src/teal
+
+gcloud init
+
+gcloud run deploy
+gcloud run deploy algochecker-api 
 
 ```
 
@@ -90,6 +97,11 @@ firebase deploy --only hosting:algochecker
     }
    
 ```
+
+# Future Work
+* Organize Smartcontract timeline view.
+* Merge another tool, Auditing, Formal verification.
+
 
 # Credit
 * [Algorand](https://www.algorand.com/), [AlgoExplorer](https://algoexplorer.io/) and Github (API).

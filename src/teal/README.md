@@ -1,5 +1,13 @@
 
+
 # Dev command (local)
+
+* (reach) require reach tool, compile rsh.
+
+```
+curl https://docs.reach.sh/reach -o reach ; chmod +x reach
+
+```
 
 ```
 python3 -m venv venv
