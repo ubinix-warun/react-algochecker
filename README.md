@@ -6,9 +6,12 @@ This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). ser
 
 <img src="https://user-images.githubusercontent.com/3756229/186065227-345ad806-a93a-4629-9058-e69dc880793f.png" width="70%">
 
-### 🍻 We got 11 Voting-weighted from [RxC QV](https://quadraticvote.radicalxchange.org/event?id=85cc82b8-9c29-4cde-b53a-b8f4a48f3472). Top 3 of [Bounty](https://gitcoin.co/issue/29142), Thanks you very much. 
+### 🍻 We got 11 Voting-weighted from [RxC QV](https://quadraticvote.radicalxchange.org/event?id=85cc82b8-9c29-4cde-b53a-b8f4a48f3472). 
 
 <img src="https://user-images.githubusercontent.com/3756229/189803380-5efbeae0-9daa-4ec9-9c4e-ef838297bd88.png" width="35%">
+
+Top 3 of [Bounty](https://gitcoin.co/issue/29142) 
+[Algorand Greehouse Hack #1](https://gitcoin.co/hackathon/greenhouse), Thanks you very much. 
 
 # Screenshots
 
