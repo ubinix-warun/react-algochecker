@@ -1,5 +1,8 @@
 # Algo Checker
 
+Challenge With [Bounty](https://gitcoin.co/issue/29142) - [Algorand Greehouse Hack #1](https://gitcoin.co/hackathon/greenhouse). <br/>
+>> Create a web app that verifies the claimed source code of an Algorand on-chain application. A user should be able to submit an application id and a Github URL for a Teal contract and check if the compiled bytecode of the Teal program matches the on-chain values. 
+
 AlgoChecker verifies On-Chain and Off-Chain code, and Support TEAL (PyTEAL/REACH) script. 
 
 This project based on [MUI](https://mui.com/)/[React](https://reactjs.org/). serve API with [Flask](https://flask.palletsprojects.com/en/2.2.x/) and save record on [PysonDB (v2)](https://pysondb.github.io/pysonDB-v2).
